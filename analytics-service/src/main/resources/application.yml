@@ -1,0 +1,22 @@
+spring:
+  application: {name: analytics-service}
+  cloud:
+    consul:
+      host: localhost
+      port: 8500
+      discovery:
+        service-name: analytics-service
+  config:
+    import: optional:consul:
+server:
+  port: 8087
+sc360:
+  internal-api-key: ${SC360_INTERNAL_API_KEY:local-dev-key}
+management:
+  endpoints: {web: {exposure: {include: health,info}}}
+clients:
+  warehouse: {url: http://localhost:8085}
+  auth: {url: http://localhost:8090}
+  notification: {url: http://localhost:8088}
+  procurement: {url: http://localhost:8089}
+  logistics: {url: http://localhost:8091}

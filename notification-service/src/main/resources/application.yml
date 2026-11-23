@@ -1,0 +1,30 @@
+spring:
+  application: {name: notification-service}
+  cloud:
+    consul:
+      host: localhost
+      port: 8500
+      discovery:
+        service-name: notification-service
+  config:
+    import: optional:consul:
+  datasource:
+    url: jdbc:mysql://localhost:3306/notification_db?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true
+    username: root
+    password: root
+  jpa:
+    hibernate: {ddl-auto: update}
+    open-in-view: false
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+server:
+  port: 8088
+sc360:
+  internal-api-key: ${SC360_INTERNAL_API_KEY:local-dev-key}
+management:
+  endpoints: {web: {exposure: {include: health,info}}}
+clients:
+  warehouse: {url: http://localhost:8085}
